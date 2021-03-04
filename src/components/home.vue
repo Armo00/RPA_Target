@@ -26,10 +26,10 @@
                          router
                          :default-active="$route.path">
 
-                    <el-submenu index="0" >
+                    <el-submenu index="1" >
                         <template slot="title">
                             <i class="el-icon-document"></i>
-                            <span>发票填报</span>
+                            <span>填报</span>
                         </template>
                         <el-menu-item-group>
                             <el-menu-item index="/filling">
@@ -42,7 +42,7 @@
 
                     </el-submenu>
 
-                    <el-submenu index="1">
+                    <el-submenu index="2">
                         <template slot="title">
                             <i class="el-icon-menu"></i>
                             <span>修改飞机</span>
@@ -60,19 +60,6 @@
                                     <span>更改构型</span>
                                 </template>
                             </el-menu-item>
-                        </el-menu-item-group>
-                    </el-submenu>
-
-                    <el-submenu index="2" disabled>
-                        <template slot="title">
-                            <i class="el-icon-s-data"></i>
-                            <span>飞机数据分析</span>
-                        </template>
-                        <el-menu-item-group>
-                            <el-menu-item index="/profitData">盈利数据</el-menu-item>
-                            <el-menu-item index="/wearData">损耗数据</el-menu-item>
-                            <el-menu-item index="/advanceAnalysis">高级分析(测试中)</el-menu-item>
-                            <el-menu-item index="/advanceVisualization">高级数据可视化(测试中)</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
 
@@ -211,7 +198,11 @@
         .el-menu{
             border-right: none;
             .el-submenu{
-                           i{margin-right: 15px;}
+                           i{margin-right: 10px;
+                             float: left;
+                             transform:translate(0%,90%);
+                            }
+                            span{float: left;}
                        }
             .el-menu-item{
                 i{margin-right: 15px;}
