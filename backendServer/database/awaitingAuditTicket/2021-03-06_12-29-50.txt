@@ -1,0 +1,1 @@
+{'overboardSender': '', 'fromAddress': '·Ö3·Ö3·Ö3', 'toAddress': '', 'invoiceNo': '1234565', 'importDate': '', 'salesOrderNo': '', 'incoterms': '', 'importItems': [{'materialDescription': '', 'ogCountry': '', 'HTSNumber': '', 'quantity': '', 'unitPrice': '', 'extendedPrice': '', 'ECCN': '', 'license': '', 'valid': ''}]}

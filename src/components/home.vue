@@ -29,13 +29,19 @@
                     <el-submenu index="1" >
                         <template slot="title">
                             <i class="el-icon-document"></i>
-                            <span>填报</span>
+                            <span>填报项目</span>
                         </template>
                         <el-menu-item-group>
-                            <el-menu-item index="/filling">
+                            <el-menu-item index="/fillingTicket">
                                 <template slot="title">
                                     <i class="el-icon-rank"></i>
                                     <span>发票</span>
+                                </template>
+                            </el-menu-item>
+                            <el-menu-item index="/fillingWaybill">
+                                <template slot="title">
+                                    <i class="el-icon-rank"></i>
+                                    <span>运单</span>
                                 </template>
                             </el-menu-item>
                         </el-menu-item-group>
@@ -45,19 +51,19 @@
                     <el-submenu index="2">
                         <template slot="title">
                             <i class="el-icon-menu"></i>
-                            <span>修改飞机</span>
+                            <span>审核已填报项目</span>
                         </template>
                         <el-menu-item-group>
-                            <el-menu-item index="/modifyHub">
+                            <el-menu-item index="/auditTicket">
                                 <template slot="title">
                                     <i class="el-icon-rank"></i>
-                                    <span>更改hub</span>
+                                    <span>审核发票</span>
                                 </template>
                             </el-menu-item>
-                            <el-menu-item index="/modifyModel">
+                            <el-menu-item index="/auditWaybill">
                                 <template slot="title">
                                     <i class="el-icon-share"></i>
-                                    <span>更改构型</span>
+                                    <span>审核运单</span>
                                 </template>
                             </el-menu-item>
                         </el-menu-item-group>

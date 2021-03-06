@@ -45,8 +45,7 @@
 <script>export default {
         data() {
         return {
-            serverUrl: '121.5.27.218:9999',
-            //serverUrl:'127.0.0.1:9999',
+            serverUrl:'127.0.0.1:5000',
             loginForm: {
                 Mode:'0',
                 username: '',
@@ -83,22 +82,14 @@
                     var sendData = { Mode: '0', username: this.loginForm.username, password: this.loginForm.password };
                     const result = this.$http.post('http://' + this.serverUrl+'/login', sendData).then(res => {
                         //console.log(res);
-                        if (res.data.return_code == 8000) return this.$message.error('用户名错误');
-                        if (res.data.return_code == 8001) return this.$message.error('密码错误');
-                        if (res.data.return_code == 8100) return this.$message.error(res.data.return_info);
-                        if (res.data.return_code == 9000) return this.$message.error(res.data.result);
-                        if (res.data.return_code == 20001) {
-                            window.sessionStorage.setItem('token', res.data.token);
-                            //this.$message.success(res.data.return_info);
-                            //console.log(res.data.token);
-                            this.$router.push('/admin');
-                            return;
-                        };
-                        if (res.data.return_code == 200) {
+                        if (res.data.status == 8000) return this.$message.error('服务器错误');
+                        if (res.data.status == 8001) return this.$message.error('不存在此用户');
+                        if (res.data.status == 8002) return this.$message.error('密码错误');
+                        if (res.data.status == 200) {
                             this.$message.success('登陆成功！');
                             window.sessionStorage.setItem('token', res.data.token);
-                            window.sessionStorage.setItem('Username', res.data.username);
-                            window.sessionStorage.setItem('allHub', res.data.allHub);
+                            window.sessionStorage.setItem('Username', this.loginForm.username);
+                            window.sessionStorage.setItem('serverURL', this.serverUrl);
                             this.$router.push('/home');
                         } else {
                             this.$message.error('发生错误！！');

@@ -4,7 +4,7 @@
         <!-- 面包屑导航区域 -->
         <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item>发票填报</el-breadcrumb-item>
+            <el-breadcrumb-item>发票审核</el-breadcrumb-item>
         </el-breadcrumb>
 
         <!-- 卡片视图区域 -->
@@ -24,6 +24,19 @@
                     <el-button type="primary" @click="placeholder()">确 定</el-button>
                 </span>
             </el-dialog>
+
+            <div class="fileBox">
+                <el-form ref="form"
+                         :model="ticketFormData">
+                    <el-form-item></el-form-item>
+
+
+                    <el-form-item v-for="(item, index) in fileData">
+                        <el-button @click.prevent="setData(item)" style="width: 100%;"  >{{item.invoiceNo}}</el-button>
+                    </el-form-item>
+
+                </el-form>
+            </div>
 
             <el-form ref="form"
                      :model="ticketFormData"
@@ -78,10 +91,11 @@
                 </el-form-item>
                 <el-form-item>
                     <el-button @click="addItem" name="newItem">新增货物</el-button>
-                    <el-button type="primary" @click="commitTicketData()" name="commitItem">提交</el-button>
+                    <el-button type="primary" @click="getData()" name="commitItem">提交</el-button>
                 </el-form-item>
 
             </el-form>
+
 
 
 
@@ -94,7 +108,8 @@
 <script>
     export default {
         mounted() {
-            this.serverUrl = window.sessionStorage.getItem('serverUrl');           
+            this.serverUrl = window.sessionStorage.getItem('serverUrl'); 
+            this.getData();
         },
         data() {
             return {
@@ -129,6 +144,7 @@
                     ],
                     
                 },
+                fileData:[],
             }
         },
         methods: {
@@ -150,11 +166,29 @@
                 var item = { materialDescription: '', ogCountry: '', HSTNumber: '', quantity: '', unitPrice: '', extendedPrice: '', ECCN: '', license: '', valid: '' };
                 this.ticketFormData.importItems.push(item);
             },
+
+            getData() {
+                var sendData = { mode: 'awaitingAuditTicket' };
+                const result = this.$http.post('http://' + this.serverUrl + '/getData', sendData).then(res => {
+                    console.log(res.data.data);
+                    this.fileData = res.data.data;
+                });
+            },
+            setData(item) {
+                
+                this.ticketFormData = item;
+            },
+
+
+
+
             commitTicketData() {
                 var sendData = { data: this.ticketFormData, mode:'awaitingAuditTicket' };
                 console.log(this.ticketFormData);
                 const result = this.$http.post('http://' + this.serverUrl + '/commitData', sendData).then(res => {
-                    this.$message.success('提交成功！')
+                    console.log(res.data);
+                    
+                    
                 });
             },
             
@@ -186,7 +220,15 @@
     }
     .ticketForm {
         border: 2px solid #333744;
-        width: 100%;
+        width: 70%;
+        display:inline-block;
+    }
+    .fileBox {
+        width: 28%;
+        display:inline-block;
+        border: 2px solid #333744;
+        margin-right:10px;
+        vertical-align:top;
     }
     .inline-input {
         margin-left: 10px;
